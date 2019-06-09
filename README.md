@@ -16,4 +16,22 @@
 
 ## Hive安装和部署
 
-安装包下载：`curl -O http://archive.cloudera.com/cdh5/cdh/5/hive-1.1.0-cdh5.7.0.tar.gz`
+- 安装包下载：`curl -O http://archive.cloudera.com/cdh5/cdh/5/hive-1.1.0-cdh5.7.0.tar.gz`
+- 解压并配置环境变量
+- 修改配置文件  
+**`hive.env.sh`**  
+
+|name    | description  |  
+|--------|------|
+|HADOOP_HOME   | 指定Hadoop安装路径 |
+|HIVE_CONF_DIR  |指定hive配置文件路径|
+
+**`hive-site.xml`** 
+
+|name    | value   | 
+|-------|----------|
+|avax.jdo.option.ConnectionURL|jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true&amp;useSSL=false|
+|javax.jdo.option.ConnectionDriverName|com.mysql.jdbc.Driver|
+|javax.jdo.option.ConnectionUserName|root|
+|javax.jdo.option.ConnectionPassword<|123456|
+web界面配置参考：https://cwiki.apache.org/confluence/display/Hive/HiveWebInterface#HiveWebInterface-FeaturesofHWI
