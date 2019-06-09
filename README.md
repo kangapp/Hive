@@ -34,4 +34,5 @@
 |javax.jdo.option.ConnectionDriverName|com.mysql.jdbc.Driver|
 |javax.jdo.option.ConnectionUserName|root|
 |javax.jdo.option.ConnectionPassword<|123456|  
+
 web界面配置参考：https://cwiki.apache.org/confluence/display/Hive/HiveWebInterface#HiveWebInterface-FeaturesofHWI
