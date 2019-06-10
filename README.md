@@ -30,9 +30,74 @@
 
 |name    | value   | 
 |-------|----------|
-|avax.jdo.option.ConnectionURL|jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true&amp;useSSL=false|
+|avax.jdo.option.ConnectionURL|jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true\&amp;useSSL=false|
 |javax.jdo.option.ConnectionDriverName|com.mysql.jdbc.Driver|
 |javax.jdo.option.ConnectionUserName|root|
 |javax.jdo.option.ConnectionPassword<|123456|  
 
 web界面配置参考：https://cwiki.apache.org/confluence/display/Hive/HiveWebInterface#HiveWebInterface-FeaturesofHWI
+
+- 官网下载mysql和mysql连接类  
+启动如有mysql报错，可以尝试初始化：`schematool -dbType mysql -initSchema`
+
+## Hive DDL（数据定义语言）之数据库操作
+
+官网地址：https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL
+
+### Create/Drop/Alter/Use Database
+
+- Create Database
+> CREATE (DATABASE|SCHEMA) [IF NOT EXISTS] database_name  
+  [COMMENT database_comment]  
+  [LOCATION hdfs_path]  
+  [WITH DBPROPERTIES (property_name=property_value, ...)];  
+
+  查看数据库信息
+  ![查看数据库信息](images/DBS.png)  
+  ![](images/desc.png)
+  命令行添加当前数据库提示  
+  `set hive.cli.print.current.db=true;`
+
+- Drop Database
+> DROP (DATABASE|SCHEMA) [IF EXISTS] database_name [RESTRICT|CASCADE];
+
+- Alter Database
+> ALTER (DATABASE|SCHEMA) database_name SET DBPROPERTIES (property_name=property_value, ...);   -- (Note: SCHEMA added in Hive 0.14.0)
+ 
+> ALTER (DATABASE|SCHEMA) database_name SET OWNER [USER|ROLE] user_or_role;   -- (Note: Hive 0.13.0 and later; SCHEMA added in Hive 0.14.0)
+  
+> ALTER (DATABASE|SCHEMA) database_name SET LOCATION hdfs_path; -- (Note: Hive 2.2.1, 2.4.0 and later)
+
+- Use Database
+
+### Create/Drop/Truncate Table
+
+- [Create Table](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTable)
+
+示例
+```
+hive (hive)> create table emp(
+           > empno int,
+           > ename string,
+           > job string,
+           > mgr int,
+           > hiredate string,
+           > sal double,
+           > deptno int
+           > ) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+```
+
+查看表结构信息  
+`desc formatted emp;`
+
+## Hive DML（数据操作语言）
+
+### Loading files into tables
+
+>LOAD DATA [LOCAL] INPATH 'filepath' [OVERWRITE] INTO TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
+ 
+>LOAD DATA [LOCAL] INPATH 'filepath' [OVERWRITE] INTO TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)] [INPUTFORMAT 'inputformat' SERDE 'serde'] (3.0 or later)
+```bash
+# /user/hive/warehouse/hive.db/emp/emp.txt
+hive (hive)> LOAD DATA LOCAL INPATH '/Users/liufukang/app/hive-1.1.0-cdh5.7.0/test_data/emp.txt' OVERWRITE INTO TABLE emp;
+```
