@@ -90,6 +90,23 @@ hive (hive)> create table emp(
 查看表结构信息  
 `desc formatted emp;`
 
+- Drop Table
+> DROP TABLE [IF EXISTS] table_name [PURGE];
+
+- Truncate Table
+> TRUNCATE TABLE table_name [PARTITION partition_spec];    
+partition_spec:  
+    : (partition_column = partition_col_value, partition_column = partition_col_value...)
+
+### Alter Table/Partition/Column
+- [Alter Table](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-AlterTable)
+
+- [Alter Partition](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-AlterPartition)
+
+- [Alter Column](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-AlterColumn)
+
+- [Alter Either Table or Partition](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-AlterEitherTableorPartition)
+
 ## Hive DML（数据操作语言）
 
 ### Loading files into tables
@@ -101,3 +118,16 @@ hive (hive)> create table emp(
 # /user/hive/warehouse/hive.db/emp/emp.txt
 hive (hive)> LOAD DATA LOCAL INPATH '/Users/liufukang/app/hive-1.1.0-cdh5.7.0/test_data/emp.txt' OVERWRITE INTO TABLE emp;
 ```
+
+### [Inserting data into Hive Tables from queries](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DML#LanguageManualDML-InsertingdataintoHiveTablesfromqueries)
+```sql
+INSERT INTO TABLE emp1 SELECT * FROM emp;
+```
+
+### [Writing data into the filesystem from queries](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DML#LanguageManualDML-Writingdataintothefilesystemfromqueries)
+```SQL
+hive (hive)> INSERT OVERWRITE LOCAL DIRECTORY '/Users/liufukang/app/hive-1.1.0-cdh5.7.0/test_data/' ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+           > SELECT * FROM emp1;
+```
+
+## [LanguageManual Selec](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Select)
