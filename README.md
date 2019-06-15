@@ -49,7 +49,7 @@ web界面配置参考：https://cwiki.apache.org/confluence/display/Hive/HiveWeb
 - 官网下载mysql和mysql连接类  
 启动如有mysql报错，可以尝试初始化：`schematool -dbType mysql -initSchema`
 
-## Hive CLI
+## Hive CLI(客户端操作)
 
 ### Hive DDL（数据定义语言）之数据库操作
 
@@ -143,4 +143,22 @@ hive (hive)> INSERT OVERWRITE LOCAL DIRECTORY '/Users/liufukang/app/hive-1.1.0-c
 
 ### [LanguageManual Select](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Select)
 
-### [实践]()
+### [实践](https://github.com/kangapp/Hive/tree/master/CLI)
+
+## Beeline
+> HiveServer2d的CLI，一个JDBC客户端
+### 嵌入式模式
+> 返回一个嵌入式的Hive，类似Hive CLI
+
+### 远程模式
+> 通过Thrift协议与某个单独的Hive Server2进程进行连接通信
+
+|hive-site.xml||
+|---|---|
+|name | description|
+|Hive.server2.thrift.min.worker.threads|最小工作线程数，默认5（最大500）
+|Hive.server2.thrift.port|TCP的监听端口，默认10000|
+|Hive.server2.thrift.bind.host|TCP绑定的主机，默认localhost|
+|Hive.server2.thrift.transport.mode|默认TCP,可选HTTP|
+|Hive.server2.thrift.http.port|HTTP的监听端口，默认值为10001|
+
