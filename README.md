@@ -146,7 +146,7 @@ hive (hive)> INSERT OVERWRITE LOCAL DIRECTORY '/Users/liufukang/app/hive-1.1.0-c
 ### [实践](https://github.com/kangapp/Hive/tree/master/CLI)
 
 ## Beeline
-> HiveServer2d的CLI，一个JDBC客户端
+> HiveServer2的CLI，一个JDBC客户端
 
 |hive-site.xml||
 |---|---|
