@@ -147,11 +147,6 @@ hive (hive)> INSERT OVERWRITE LOCAL DIRECTORY '/Users/liufukang/app/hive-1.1.0-c
 
 ## Beeline
 > HiveServer2d的CLI，一个JDBC客户端
-### 嵌入式模式
-> 返回一个嵌入式的Hive，类似Hive CLI
-
-### 远程模式
-> 通过Thrift协议与某个单独的Hive Server2进程进行连接通信
 
 |hive-site.xml||
 |---|---|
@@ -161,4 +156,12 @@ hive (hive)> INSERT OVERWRITE LOCAL DIRECTORY '/Users/liufukang/app/hive-1.1.0-c
 |Hive.server2.thrift.bind.host|TCP绑定的主机，默认localhost|
 |Hive.server2.thrift.transport.mode|默认TCP,可选HTTP|
 |Hive.server2.thrift.http.port|HTTP的监听端口，默认值为10001|
+
+### 嵌入式模式
+> 返回一个嵌入式的Hive，类似Hive CLI
+
+### 远程模式
+> 通过Thrift协议与某个单独的Hive Server2进程进行连接通信
+
+
 
