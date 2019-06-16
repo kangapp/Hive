@@ -102,7 +102,8 @@ hive (hive)> create table emp(
 `desc formatted emp;`
 
 - Drop Table
-> DROP TABLE [IF EXISTS] table_name [PURGE];
+> DROP TABLE [IF EXISTS] table_name [PURGE];  
+> 如果不指定purge，数据会被移动到.Transh/Current目录下
 
 - Truncate Table
 > TRUNCATE TABLE table_name [PARTITION partition_spec];    
@@ -230,5 +231,47 @@ cast（string as date）
 cast（date as timestamp）
 cast（date as string）
 ```
+## 分区表
+> 分区表指的是创建表时，指定parrtition的分区空间，每一个分区值都会形成一个具体的分区目录，分区字段是**伪字段**，不能与表定义字段重名。
+
+### 分区语法
+```sql
+partitioned by (par_col pa_type)
+```
+
+### 静态分区和动态分区
+```bash
+#开启动态分区功能
+set hive.exec.dynamic.partition=true;
+#允许所有的分区字段都可以使用动态分区，默认strict
+set hive.exec.dynamic.partition.mode=nostrict;
+```
+
+## 分桶表
+
+```BASH
+#开启分桶功能
+set hive.enforce.bucketing = true
+```
+
+### 分桶语法
+```sql
+CLUSTERED BY(userid) SORTED BY(time) INTO 32 BUCKETS
+```
+
+## 倾斜表
+> 倾斜表只是通过将倾斜特别严重的列分开存储为不同的文件，每个倾斜值指定为一个目录或一个文件，因此在查询的时候，可以通过过滤倾斜数据来避免数据倾斜的问题
+
+### 语法
+```sql
+SKEWED BY(userid) on(null) [STORED AS DIRECTORIES]
+```
+
+## 临时表
+
+> 只能在当前会话中可见的表称为临时表  
+如果创建临时表时，创建了一个与已存在表名相同的临时表，则在当前会话中，所有对该表的使用都是指向临时表  
+不支持分区字段  
+不支持建索引
 
 ## 实战
