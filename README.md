@@ -163,5 +163,72 @@ hive (hive)> INSERT OVERWRITE LOCAL DIRECTORY '/Users/liufukang/app/hive-1.1.0-c
 ### 远程模式
 > 通过Thrift协议与某个单独的Hive Server2进程进行连接通信
 
+先启动hiveserver2  
+再启动beeline
+
+```bash
+>beeline !connect jdbc:hive2://localhost:10000/hive  
+#输入用户名和密码
+
+1: jdbc:hive2://localhost:10000/hive>
+```
 
 
+## Hive数据类型
+
+### 数字类型
+|Type | description |
+|---| ---|
+|TINYINT|1-byte signed integer, from -128 to 127|
+|SMALLINT|2-byte signed integer, from -32,768 to 32,767|
+|INT/INTEGER|4-byte signed integer, from -2,147,483,648 to 2,147,483,647|
+|BIGINT|8-byte signed integer, from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807|
+|FLOAT|1-byte signed integer, from -128 to 127|
+|DOUBLE|1-byte signed integer, from -128 to 127|
+
+### 时间/日期类型
+|Type | description |
+|---| ---|
+|TIMESTAMP |[详情](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types#LanguageManualTypes-timestamp)|
+|DATE|0000-­01-­01 to 9999-­12-­31|
+
+### 字符
+|Type | description |
+|---| ---|
+|STRING|用单引号或双引号引起来的字符串|
+|VARCHAR|字符数介于1-65535，超过的会被截断；不能直接使用UDF,用GenericUDF代替或先转换成STRING|
+|CHAR|固定长度，最大长度255，char(10)|
+
+### Misc
+|Type | description |
+|---| ---|
+|BOOLEAN|布尔类型|
+|BINARY|二进制类型|
+
+### 复杂数据类型
+|Type | description |
+|---| ---|
+|ARRAY<TYPE>|数组|
+|MAP<primitive_type, data_type>|映射|
+|STRUCT<col_name : data_type [COMMENT col_comment], ...>|结构体|
+|UNIONTYPE<data_type, data_type, ...> |联合体|
+
+### 数据类型的隐式转换
+![隐式转换](images/transform.png)
+
+### 数据类型的显示转换方法
+> CAST (VALUE AS TYPE)
+
+```SQL
+SELECT name,salary FROM employee
+WHERE cast(salary as float) < 100.0
+
+#时间戳相关转换
+cast（date as date）
+cast（timestamp as date）
+cast（string as date）
+cast（date as timestamp）
+cast（date as string）
+```
+
+## 实战
