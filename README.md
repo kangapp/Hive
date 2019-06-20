@@ -214,6 +214,8 @@ hive (hive)> INSERT OVERWRITE LOCAL DIRECTORY '/Users/liufukang/app/hive-1.1.0-c
 |STRUCT<col_name : data_type [COMMENT col_comment], ...>|结构体|
 |UNIONTYPE<data_type, data_type, ...> |联合体|
 
+#### 复杂数据类型实战
+
 ### 数据类型的隐式转换
 ![隐式转换](images/transform.png)
 
