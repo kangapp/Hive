@@ -247,6 +247,8 @@ set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nostrict;
 ```
 
+### 分区表实战
+
 ## 分桶表
 
 ```BASH
@@ -273,5 +275,3 @@ SKEWED BY(userid) on(null) [STORED AS DIRECTORIES]
 如果创建临时表时，创建了一个与已存在表名相同的临时表，则在当前会话中，所有对该表的使用都是指向临时表  
 不支持分区字段  
 不支持建索引
-
-## 实战
