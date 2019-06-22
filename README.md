@@ -300,4 +300,4 @@ select sum(salary) from emp1;
 --- map or array
 select explode(deductions) from emp1;
 ```
-## 实战
+## [实战](https://github.com/kangapp/Hive/tree/master/UDF)
