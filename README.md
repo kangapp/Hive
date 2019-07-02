@@ -326,3 +326,5 @@ select explode(deductions) from emp1;
 
 > hive.groupby.skewindata=true; 默认false  
 设为true时，查询语句的执行计划会生成2个MR作业，第一个为预聚合，第二个是根据预聚合的结果进行最终聚合。
+
+### 空值的处理
