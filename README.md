@@ -300,4 +300,29 @@ select sum(salary) from emp1;
 --- map or array
 select explode(deductions) from emp1;
 ```
-## [实战](https://github.com/kangapp/Hive/tree/master/UDF)
+### [实战](https://github.com/kangapp/Hive/tree/master/UDF)
+
+## Hive优化
+> - Hive默认基于MapReduce执行引擎，MapReduce的缺点直接成为Hive的短板
+> - Hive的本质是Join和Group By，而这两者直接产生了shuffle的操作
+
+### 小文件合并
+
+> - 小文件过多导致HDFS的NameNode的负载过大
+> - 小文件过多导致Metastore解析文件负担过大
+> - 建议没执行完一个SQL后就进行小文件合并
+
+### 扫描文件
+
+- 列剪裁(查询时只读取所需要的列)
+> 控制参数：hive.optimize.cp=true;
+
+- 分区剪裁(查询分区表减少读取不必要的分区,使用where)
+> 控制参数：hive.optimize.pruner=true;
+
+### Join优化
+
+### GroupBy优化
+
+> hive.groupby.skewindata=true; 默认false  
+设为true时，查询语句的执行计划会生成2个MR作业，第一个为预聚合，第二个是根据预聚合的结果进行最终聚合。
